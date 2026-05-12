@@ -29,7 +29,24 @@ def print_movie(movie):
     print(f"  Ratings: {ratings}")
     print(f"  Runtime: {runtime}")
 
+def get_movie_by_title():
+    """Prompt the user for a movie title and search the table."""
+    
+    table = get_table()
 
+    title_input = input("Enter a movie title: ")
+
+    response = table.scan(
+        FilterExpression=Key("Title").eq(title_input)
+    )
+
+    items = response.get("Items", [])
+
+    if items:
+        print("\nMovie found:\n")
+        print_movie(items[0])
+    else:
+        print(f"\nMovie '{title_input}' not found.")
 
 def print_all_movies():
     """Scan the entire Movies table and print each item."""
