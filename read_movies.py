@@ -70,6 +70,8 @@ def print_all_movies():
 def main():
     print("===== Reading from DynamoDB =====\n")
     print_all_movies()
+    print("\n===== Search for a Movie =====\n")
+    get_movie_by_title()
 
 
 if __name__ == "__main__":
