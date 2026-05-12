@@ -34,20 +34,17 @@ def print_movie(movie):
 def print_all_movies():
     """Scan the entire Movies table and print each item."""
     table = get_table()
-
-    print("Connected table:", table.table_name)
-
+    
+    # scan() retrieves ALL items in the table.
+    # For large tables you'd use query() instead — but for our small
+    # dataset, scan() is fine.
     response = table.scan()
-
-    print("RAW RESPONSE:")
-    print(response)
-
     items = response.get("Items", [])
-
+    
     if not items:
         print("No movies found. Make sure your DynamoDB table has data.")
         return
-
+    
     print(f"Found {len(items)} movie(s):\n")
     for movie in items:
         print_movie(movie)
